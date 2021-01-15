@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+/Users/edvaldosantana/development/projetos/sales_telecom012021/lib/app/login/model/const_api.dart
 
 # Web related
 lib/generated_plugin_registrant.dart
