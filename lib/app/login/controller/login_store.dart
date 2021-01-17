@@ -17,36 +17,41 @@ abstract class _LoginStoreBase with Store {
   void togglePasswordVisibility() => passwordVisible = !passwordVisible;
 
   @observable
-  String login = 'edvaldo.santana@experiencesolucoes.com.br';
+  String _login = 'edvaldo.santana@experiencesolucoes.com.br';
 
   @action
-  void setLogin(String value) => login = value;
+  void setLogin(String value) => _login = value;
 
   @observable
-  String senha = '';
+  String _senha = '';
 
   @action
-  void setSenha(String value) => senha = value;
+  void setSenha(String value) => _senha = value;
 
   @computed
-  bool get isLoginValid => RegExp(ConstsApi.VALIDAR_EMAIL).hasMatch(login);
+  bool get isLoginValid => RegExp(ConstsApi.VALIDAR_EMAIL).hasMatch(_login);
 
   @computed
-  bool get isSenhaValid => senha.length > 2;
+  bool get isSenhaValid => _senha.length > 2;
 
-  @computed
-  bool get isformValid => isLoginValid && isSenhaValid;
+  // @computed
+  // bool get isformValid => isLoginValid && isSenhaValid;
 
+  // Login
   @observable
   bool loading = false;
 
   @observable
   bool loggedIn = false;
 
+  @computed
+  Function get loginPressed =>
+      (isLoginValid && isSenhaValid && !loading) ? getLogin : null;
+
   @action
   Future<void> getLogin(context) async {
     loading = true;
-    ResponseApi response = await LoginApi.login(login, senha);
+    ResponseApi response = await LoginApi.login(_login, _senha);
     if (response.ok) {
       push(
         context,

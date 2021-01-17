@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_telecom012021/app/login/controller/login_store.dart';
-import 'package:sales_telecom012021/global/components/myTextFormField.dart';
 
 class TextFieldLogin extends StatelessWidget {
   @override
@@ -18,6 +17,7 @@ class TextFieldLogin extends StatelessWidget {
         child: MyTextFormField(
           'Login',
           'Digite seu login',
+          enabled: !_loginStore.loading,
           icon: Icon(Icons.person),
           ctrl: _tLogin,
           validar: _validateLogin,

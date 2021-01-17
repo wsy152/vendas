@@ -23,12 +23,12 @@ mixin _$LoginStore on _LoginStoreBase, Store {
       (_$isSenhaValidComputed ??= Computed<bool>(() => super.isSenhaValid,
               name: '_LoginStoreBase.isSenhaValid'))
           .value;
-  Computed<bool> _$isformValidComputed;
+  Computed<Function> _$loginPressedComputed;
 
   @override
-  bool get isformValid =>
-      (_$isformValidComputed ??= Computed<bool>(() => super.isformValid,
-              name: '_LoginStoreBase.isformValid'))
+  Function get loginPressed =>
+      (_$loginPressedComputed ??= Computed<Function>(() => super.loginPressed,
+              name: '_LoginStoreBase.loginPressed'))
           .value;
 
   final _$passwordVisibleAtom = Atom(name: '_LoginStoreBase.passwordVisible');
@@ -46,33 +46,33 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$loginAtom = Atom(name: '_LoginStoreBase.login');
+  final _$_loginAtom = Atom(name: '_LoginStoreBase._login');
 
   @override
-  String get login {
-    _$loginAtom.reportRead();
-    return super.login;
+  String get _login {
+    _$_loginAtom.reportRead();
+    return super._login;
   }
 
   @override
-  set login(String value) {
-    _$loginAtom.reportWrite(value, super.login, () {
-      super.login = value;
+  set _login(String value) {
+    _$_loginAtom.reportWrite(value, super._login, () {
+      super._login = value;
     });
   }
 
-  final _$senhaAtom = Atom(name: '_LoginStoreBase.senha');
+  final _$_senhaAtom = Atom(name: '_LoginStoreBase._senha');
 
   @override
-  String get senha {
-    _$senhaAtom.reportRead();
-    return super.senha;
+  String get _senha {
+    _$_senhaAtom.reportRead();
+    return super._senha;
   }
 
   @override
-  set senha(String value) {
-    _$senhaAtom.reportWrite(value, super.senha, () {
-      super.senha = value;
+  set _senha(String value) {
+    _$_senhaAtom.reportWrite(value, super._senha, () {
+      super._senha = value;
     });
   }
 
@@ -153,13 +153,11 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   String toString() {
     return '''
 passwordVisible: ${passwordVisible},
-login: ${login},
-senha: ${senha},
 loading: ${loading},
 loggedIn: ${loggedIn},
 isLoginValid: ${isLoginValid},
 isSenhaValid: ${isSenhaValid},
-isformValid: ${isformValid}
+loginPressed: ${loginPressed}
     ''';
   }
 }
