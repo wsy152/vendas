@@ -15,14 +15,9 @@ abstract class _LoginStoreBase with Store {
 
   @action
   void togglePasswordVisibility() => passwordVisible = !passwordVisible;
+
   @observable
   String login = 'edvaldo.santana@experiencesolucoes.com.br';
-
-  @observable
-  bool loading = false;
-
-  @observable
-  bool loggedIn = false;
 
   @action
   void setLogin(String value) => login = value;
@@ -41,6 +36,12 @@ abstract class _LoginStoreBase with Store {
 
   @computed
   bool get isformValid => isLoginValid && isSenhaValid;
+
+  @observable
+  bool loading = false;
+
+  @observable
+  bool loggedIn = false;
 
   @action
   Future<void> getLogin(context) async {

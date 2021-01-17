@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:projeto_sales_telecom_001/app/login/model/const_api.dart';
-import 'package:projeto_sales_telecom_001/app/login/model/response_api.dart';
-import 'package:projeto_sales_telecom_001/app/login/model/usuario_model.dart';
+import 'package:sales_telecom012021/app/login/model/const_api.dart';
 import 'package:sales_telecom012021/app/login/model/response_api.dart';
+import 'package:sales_telecom012021/app/login/model/usuario_model.dart';
 
 class LoginApi {
   static Future<ResponseApi<UsuariosModel>> login(
