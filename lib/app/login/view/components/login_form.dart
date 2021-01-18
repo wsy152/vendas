@@ -16,6 +16,8 @@ class Loginform extends StatefulWidget {
 }
 
 class _LoginformState extends State<Loginform> {
+  Size get size => MediaQuery.of(context).size;
+  bool get tamanhoTela => size.width < 450;
   LoginStore loginStore;
   ReactionDisposer disposer;
 
@@ -52,7 +54,6 @@ class _LoginformState extends State<Loginform> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Form(
       child: SingleChildScrollView(
         child: Column(
@@ -63,7 +64,7 @@ class _LoginformState extends State<Loginform> {
               ),
             ),
             Container(
-              width: size.width * 0.93,
+              width: tamanhoTela ? size.width * 0.93 : size.width * 0.50,
               margin: EdgeInsets.symmetric(vertical: 10),
               padding: EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(

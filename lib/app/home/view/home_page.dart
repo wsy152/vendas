@@ -7,7 +7,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        slivers: [],
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            snap: true,
+            pinned: true,
+            expandedHeight: 250,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('Edvaldo1'),
+            ),
+          ),
+        ],
       ),
       appBar: AppBar(),
       drawer: DrawerList(),

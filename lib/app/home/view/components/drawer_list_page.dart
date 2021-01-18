@@ -33,6 +33,7 @@ class _DrawerListState extends State<DrawerList> {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: 'Roboto',
+          fontSize: 10,
         ),
       ),
       decoration: BoxDecoration(
@@ -49,14 +50,29 @@ class _DrawerListState extends State<DrawerList> {
         child: ListView(
           children: <Widget>[
             FutureBuilder<UsuariosModel>(
-                future: future,
-                builder: (context, snapshot) {
-                  UsuariosModel user = snapshot.data;
-                  return user != null ? _header(user) : Container();
-                }),
+              future: future,
+              builder: (context, snapshot) {
+                UsuariosModel user = snapshot.data;
+                return user != null ? _header(user) : Container();
+              },
+            ),
             ListTile(
               leading: Icon(Icons.star),
-              title: Text("Favoritos"),
+              title: Text(
+                "Minha Vendas",
+                style: TextStyle(fontSize: 12),
+              ),
+              subtitle:
+                  Text("mais informações...", style: TextStyle(fontSize: 10.5)),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                print("Item 1");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text("Oportunidades"),
               subtitle: Text("mais informações..."),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -66,7 +82,47 @@ class _DrawerListState extends State<DrawerList> {
             ),
             ListTile(
               leading: Icon(Icons.help),
-              title: Text("Ajuda"),
+              title: Text("Nova Consulta"),
+              subtitle: Text("mais informações..."),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                print("Item 1");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text("Gerar Venda"),
+              subtitle: Text("mais informações..."),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                print("Item 1");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text("Pendent de Interação"),
+              subtitle: Text("mais informações..."),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                print("Item 1");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text("Interação Comercial"),
+              subtitle: Text("mais informações..."),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                print("Item 1");
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.help),
+              title: Text("Configurações"),
               subtitle: Text("mais informações..."),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
