@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:sales_telecom012021/app/home/view/home_page.dart';
+import 'package:sales_telecom012021/app/login/controller/login_store.dart';
 import 'package:sales_telecom012021/app/login/view/components/buttonlogin.dart';
 import 'package:sales_telecom012021/app/login/view/components/textfiel_login.dart';
 import 'package:sales_telecom012021/app/login/view/components/textfield_senha.dart';
 import 'package:sales_telecom012021/global/components/sized_box.dart';
+import 'package:sales_telecom012021/global/function/alert.dart';
+import 'package:sales_telecom012021/global/function/myNav.dart';
 
 class Loginform extends StatefulWidget {
   @override
@@ -11,7 +16,39 @@ class Loginform extends StatefulWidget {
 }
 
 class _LoginformState extends State<Loginform> {
+  LoginStore loginStore;
   ReactionDisposer disposer;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loginStore = Provider.of<LoginStore>(context);
+    disposer = reaction(
+      (context) => loginStore.loggedIn,
+      (loggedIn) {
+        if (loggedIn) {
+          loginStore.loggedInError = false;
+
+          push(
+            context,
+            HomePage(),
+            replace: true,
+          );
+        }
+      },
+    );
+    disposer = reaction(
+      (context) => loginStore.loggedInError,
+      (loggedInError) {
+        if (loggedInError) {
+          alert(
+            context,
+            loginStore.response.msg,
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +63,12 @@ class _LoginformState extends State<Loginform> {
               ),
             ),
             Container(
-              width: size.width * 0.90,
-              margin: EdgeInsets.symmetric(vertical: 50),
-              padding: EdgeInsets.symmetric(vertical: 20),
+              width: size.width * 0.93,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
                         color: Colors.black26,
@@ -58,5 +95,11 @@ class _LoginformState extends State<Loginform> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    disposer();
+    super.dispose();
   }
 }

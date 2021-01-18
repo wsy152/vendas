@@ -106,11 +106,41 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
+  final _$loggedInErrorAtom = Atom(name: '_LoginStoreBase.loggedInError');
+
+  @override
+  bool get loggedInError {
+    _$loggedInErrorAtom.reportRead();
+    return super.loggedInError;
+  }
+
+  @override
+  set loggedInError(bool value) {
+    _$loggedInErrorAtom.reportWrite(value, super.loggedInError, () {
+      super.loggedInError = value;
+    });
+  }
+
+  final _$responseAtom = Atom(name: '_LoginStoreBase.response');
+
+  @override
+  ResponseApi<dynamic> get response {
+    _$responseAtom.reportRead();
+    return super.response;
+  }
+
+  @override
+  set response(ResponseApi<dynamic> value) {
+    _$responseAtom.reportWrite(value, super.response, () {
+      super.response = value;
+    });
+  }
+
   final _$getLoginAsyncAction = AsyncAction('_LoginStoreBase.getLogin');
 
   @override
-  Future<void> getLogin(dynamic context) {
-    return _$getLoginAsyncAction.run(() => super.getLogin(context));
+  Future<void> getLogin() {
+    return _$getLoginAsyncAction.run(() => super.getLogin());
   }
 
   final _$_LoginStoreBaseActionController =
@@ -150,11 +180,24 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
+  void setResponse(ResponseApi<dynamic> value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.setResponse');
+    try {
+      return super.setResponse(value);
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 passwordVisible: ${passwordVisible},
 loading: ${loading},
 loggedIn: ${loggedIn},
+loggedInError: ${loggedInError},
+response: ${response},
 isLoginValid: ${isLoginValid},
 isSenhaValid: ${isSenhaValid},
 loginPressed: ${loginPressed}

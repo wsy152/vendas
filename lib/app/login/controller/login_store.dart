@@ -1,10 +1,8 @@
 import 'package:mobx/mobx.dart';
-import 'package:sales_telecom012021/app/home/view/components/home_page.dart';
 import 'package:sales_telecom012021/app/login/model/const_api.dart';
 import 'package:sales_telecom012021/app/login/model/loginApi.dart';
 import 'package:sales_telecom012021/app/login/model/response_api.dart';
-import 'package:sales_telecom012021/global/function/alert.dart';
-import 'package:sales_telecom012021/global/function/myNav.dart';
+
 part 'login_store.g.dart';
 
 class LoginStore = _LoginStoreBase with _$LoginStore;
@@ -34,9 +32,6 @@ abstract class _LoginStoreBase with Store {
   @computed
   bool get isSenhaValid => _senha.length > 2;
 
-  // @computed
-  // bool get isformValid => isLoginValid && isSenhaValid;
-
   // Login
   @observable
   bool loading = false;
@@ -44,23 +39,30 @@ abstract class _LoginStoreBase with Store {
   @observable
   bool loggedIn = false;
 
+  @observable
+  bool loggedInError = false;
+
   @computed
   Function get loginPressed =>
       (isLoginValid && isSenhaValid && !loading) ? getLogin : null;
 
+  @observable
+  ResponseApi response;
+
   @action
-  Future<void> getLogin(context) async {
+  void setResponse(ResponseApi value) => response = value;
+
+  @action
+  Future<void> getLogin() async {
     loading = true;
-    ResponseApi response = await LoginApi.login(_login, _senha);
+    loggedInError = false;
+    loggedIn = false;
+
+    response = await LoginApi.login(_login, _senha);
     if (response.ok) {
-      push(
-        context,
-        HomePage(),
-        replace: false,
-      );
       loggedIn = true;
     } else {
-      alert(context, response.msg);
+      loggedInError = true;
     }
     loading = false;
   }

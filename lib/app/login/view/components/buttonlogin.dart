@@ -12,6 +12,8 @@ class ButtonLogin extends StatelessWidget {
       return MyButton(
         'Login',
         _loginStore.loginPressed,
+        loading: _loginStore.loading,
+        fontSize: 25,
       );
     });
   }

@@ -33,6 +33,10 @@ dependencies:
   flutter_mobx: ^1.1.0
   shared_preferences: ^0.5.10
   http: ^0.12.2
+  recase: ^3.0.0
+  badges: ^1.1.1
+  date_format: ^1.0.8
+  date_range_picker: ^1.0.6
 
 dev_dependencies:
   flutter_test:

@@ -21,16 +21,21 @@ class MyButton extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * 0.07,
-      width: size.width * 0.75,
+      width: size.width * 0.72,
       child: RaisedButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
         elevation: 5,
         color: Colors.purple,
         child: loading
             ? Center(
                 child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xff009cde))))
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Color(0xff009cde),
+                  ),
+                ),
+              )
             : Text(
                 text,
                 style: TextStyle(
