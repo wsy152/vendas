@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:recase/recase.dart';
-import 'package:sales_telecom012021/app/home/controller/home_store.dart';
+import 'package:sales_telecom012021/app/drawer/view/components/list_title.dart';
 import 'package:sales_telecom012021/app/login/model/usuario_model.dart';
 import 'package:sales_telecom012021/app/login/view/login_page.dart';
 import 'package:sales_telecom012021/global/config/palleta_color.dart';
@@ -13,25 +13,30 @@ class DrawerList extends StatefulWidget {
 }
 
 class _DrawerListState extends State<DrawerList> {
-  final _homestate = HomeStore();
   UserAccountsDrawerHeader _header(UsuariosModel user) {
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${user.payload.token}'
+    };
+
     return UserAccountsDrawerHeader(
       currentAccountPicture: Observer(builder: (_) {
         return CircleAvatar(
           backgroundImage: NetworkImage(
             'https://devback.experiencesolucoes.com.br:3000' +
-                _homestate.user.payload.foto,
+                user.payload.foto,
             scale: 1.0,
-            headers: _homestate.headers,
+            headers: headers,
           ),
         );
       }),
       accountName: Text(
-        _homestate.user.payload.nome.titleCase,
+        user.payload.nome.titleCase,
         style: TextStyle(fontFamily: 'Roboto'),
       ),
       accountEmail: Text(
-        _homestate.user.payload.login,
+        user.payload.login,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontFamily: 'Roboto',
@@ -59,22 +64,13 @@ class _DrawerListState extends State<DrawerList> {
               future: future,
               builder: (context, snapshot) {
                 UsuariosModel user = snapshot.data;
-                return user != null ? _header(_homestate.user) : Container();
+                return user != null ? _header(user) : Container();
               },
             ),
-            ListTile(
-              leading: Icon(Icons.star),
-              title: Text(
-                "Minha Vendas",
-                style: TextStyle(fontSize: 12),
-              ),
-              subtitle:
-                  Text("mais informações...", style: TextStyle(fontSize: 10.5)),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                print("Item 1");
-                Navigator.pop(context);
-              },
+            ListOpcoes(
+              'Minhas Vendas',
+              'Mais Invormações',
+              Icon(Icons.ac_unit_sharp),
             ),
             ListTile(
               leading: Icon(Icons.help),

@@ -43,11 +43,11 @@ mixin _$HomeStore on _HomeStoreBase, Store {
       ActionController(name: '_HomeStoreBase');
 
   @override
-  dynamic _header(dynamic user) {
+  dynamic header(dynamic user) {
     final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
-        name: '_HomeStoreBase._header');
+        name: '_HomeStoreBase.header');
     try {
-      return super._header(user);
+      return super.header(user);
     } finally {
       _$_HomeStoreBaseActionController.endAction(_$actionInfo);
     }

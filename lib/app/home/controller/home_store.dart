@@ -12,7 +12,7 @@ abstract class _HomeStoreBase with Store {
   UsuariosModel user;
 
   @action
-  _header(user) {
+  header(user) {
     headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
