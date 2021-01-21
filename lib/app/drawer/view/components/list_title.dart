@@ -6,7 +6,7 @@ class ListOpcoes extends StatelessWidget {
   //final Widget icon;
   final Widget leading;
 
-  ListOpcoes(this.textTitle, this.textsubtitle, this.leading);
+  ListOpcoes(this.textTitle, this.textsubtitle, [this.leading]);
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sales_telecom012021/app/login/model/usuario_model.dart';
+import 'package:sales_telecom012021/global/componets/avatar.dart';
 import 'package:sales_telecom012021/global/config/palleta_color.dart';
 import 'package:sales_telecom012021/global/config/styler.dart';
 
-SliverToBoxAdapter buildHeader(double screenHeight) {
+SliverToBoxAdapter buildHeader(double screenHeight, [UsuariosModel user]) {
+  Future<UsuariosModel> future = UsuariosModel.get();
   return SliverToBoxAdapter(
     child: Container(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
       decoration: BoxDecoration(
         color: Palette.primaryColor,
         borderRadius: BorderRadius.only(
@@ -17,11 +20,33 @@ SliverToBoxAdapter buildHeader(double screenHeight) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(
-                child: Text('data'),
+              FutureBuilder<UsuariosModel>(
+                future: future,
+                builder: (context, snapshot) {
+                  UsuariosModel user = snapshot.data;
+                  return user != null ? avatar(user) : Container();
+                },
               ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Text(
+                    //   user.payload.nome,
+                    //   style: TextStyle(fontSize: 20, color: Colors.white),
+                    // ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    //Text('${user.payload.cargo}'),
+                  ],
+                ),
+              )
             ],
           ),
           SizedBox(height: screenHeight * 0.03),

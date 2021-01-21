@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:recase/recase.dart';
 import 'package:sales_telecom012021/app/drawer/view/components/list_title.dart';
 import 'package:sales_telecom012021/app/login/model/usuario_model.dart';
 import 'package:sales_telecom012021/app/login/view/login_page.dart';
-import 'package:sales_telecom012021/global/config/palleta_color.dart';
+import 'package:sales_telecom012021/app/drawer/view/components/header.dart';
 import 'package:sales_telecom012021/global/function/myNav.dart';
 
 class DrawerList extends StatefulWidget {
@@ -13,46 +11,6 @@ class DrawerList extends StatefulWidget {
 }
 
 class _DrawerListState extends State<DrawerList> {
-  UserAccountsDrawerHeader _header(UsuariosModel user) {
-    Map<String, String> headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${user.payload.token}'
-    };
-
-    return UserAccountsDrawerHeader(
-      currentAccountPicture: Observer(builder: (_) {
-        return CircleAvatar(
-          backgroundImage: NetworkImage(
-            'https://devback.experiencesolucoes.com.br:3000' +
-                user.payload.foto,
-            scale: 1.0,
-            headers: headers,
-          ),
-        );
-      }),
-      accountName: Text(
-        user.payload.nome.titleCase,
-        style: TextStyle(fontFamily: 'Roboto'),
-      ),
-      accountEmail: Text(
-        user.payload.login,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          fontSize: 10,
-        ),
-      ),
-      decoration: BoxDecoration(
-        color: Palette.primaryColor,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10.0),
-          bottomRight: Radius.circular(10.0),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Future<UsuariosModel> future = UsuariosModel.get();
@@ -64,7 +22,7 @@ class _DrawerListState extends State<DrawerList> {
               future: future,
               builder: (context, snapshot) {
                 UsuariosModel user = snapshot.data;
-                return user != null ? _header(user) : Container();
+                return user != null ? header(user) : Container();
               },
             ),
             ListOpcoes(
